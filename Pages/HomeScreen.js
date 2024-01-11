@@ -43,6 +43,7 @@ const HomeScreen = () => {
               style={{ tintColor: color, width: 30, height: 30 }}
             />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -56,6 +57,7 @@ const HomeScreen = () => {
               style={{ tintColor: color, width: 30, height: 30 }}
             />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -69,6 +71,7 @@ const HomeScreen = () => {
               style={{ tintColor: color, width: 30, height: 30 }}
             />
           ),
+          headerShown: false,
         }}
       />
     </Tab.Navigator>
@@ -77,13 +80,13 @@ const HomeScreen = () => {
 
 const MainPageScreen = () => (
   <View style={styles.container}>
-    <View style={styles.logoContainer}>
-      <Image source={require('../images/logo.png')} style={styles.logo} />
-    </View>
+    <Image source={require('../images/logo.png')} style={styles.logo} />
     <View style={styles.mottoContainer}>
-      <Text style={styles.mottoText}>
-        Zamawiaj pyszne jedzenie i ciesz się smakiem z dostawą pod drzwi!
-      </Text>
+      <View style={styles.mottoBackground}>
+        <Text style={styles.mottoText}>
+          Zamawiaj pyszne jedzenie i ciesz się smakiem z dostawą pod drzwi!
+        </Text>
+      </View>
     </View>
     <View style={styles.deliveryContainer}>
       <Image source={require('../images/delivery.png')} style={styles.deliveryImage} />
@@ -98,26 +101,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FBFFF1',
   },
-  logoContainer: {
-    marginTop: 0,
-  },
   logo: {
-    width: 350,
+    width: 300,
     height: 200,
   },
   mottoContainer: {
     marginTop: 80,
   },
+  mottoBackground: {
+    backgroundColor: '#124E78',
+    padding: 20,
+    borderRadius: 15,
+    alignItems: 'center',
+  },
   mottoText: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 20,
-    color: '#823329',
-    lineHeight: 30, 
+    color: '#FBFFF1',
+    lineHeight: 30,
   },
   deliveryContainer: {
     marginTop: 80,
+    padding: 20,
+    borderRadius: 15,
   },
   deliveryImage: {
     width: 350,
