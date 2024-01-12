@@ -1,10 +1,9 @@
-// CouponsScreen.js
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const CouponsScreen = () => (
+const MoreScreen = () => (
   <View style={styles.container}>
-    <Text style={styles.text}>Coupons Screen</Text>
+    <Text style={styles.text}>More Screen</Text>
   </View>
 );
 
@@ -21,4 +20,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CouponsScreen;
+export default MoreScreen;
