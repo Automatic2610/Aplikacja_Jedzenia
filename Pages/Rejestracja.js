@@ -1,5 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
+import axios, { Axios } from 'axios';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   Keyboard,
   ScrollView,
   Alert,
+  KeyboardAvoidingView
 } from 'react-native';
 import COLORS from '../Pages/Components/COLORS.js'
 import Input from './Components/Input.js';
@@ -58,17 +59,25 @@ const Rejestracja = ({navigation}) => {
     }
   };
 
-  const rejestracja = () => {
+  const rejestracja = async () => {
     setLoading(true);
-    setTimeout(() => {
-      try {
+    try {
+      // Wysyłanie danych na serwer przy użyciu Axiosa
+      const response = await axios.post('http://10.0.2.2:5725/register',inputs);
+      // Jeśli serwer zwrócił odpowiedź pomyślną
+      if (response.data.success) {
         setLoading(false);
-        AsyncStorage.setItem('userData', JSON.stringify(inputs));
         navigation.navigate('Logowanie');
-      } catch (error) {
-        Alert.alert('Error', 'Coś poszło nie tak');
+      } 
+      else {
+        setLoading(false);
+        Alert.alert('Błąd 1', JSON.stringify(response.data.error),[ { text: 'Zrozumiano'}]
+        );
       }
-    }, 3000);
+    } catch (error) {
+      setLoading(false);
+      Alert.alert(error);
+    }
   };
 
   const handleOnchange = (text, input) => {
