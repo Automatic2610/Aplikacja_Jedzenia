@@ -7,6 +7,7 @@ import Home from "../Pages/Home.js";
 import Rejestracja from "../Pages/Rejestracja.js";
 import HomePage from "../Pages/Home_Page.js";
 import Opinions from './Opinions.js';
+import MapScreen from './MapScreen.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,12 +44,12 @@ export default function StackNav() {
 
   return (
     <Stack.Navigator>
-        <Stack.Screen name="Opinions" component={Opinions} options={optionScreen} />
         <Stack.Screen name="Home" component={Home} options={optionScreen} />
         <Stack.Screen name="Logowanie" component={Logowanie} options={optionScreen} />
         <Stack.Screen name="Rejestracja" component={Rejestracja} options={optionScreen} />
-        {/* <Stack.Screen name="Opinions" component={Opinions} options={optionScreen} /> */}
+        <Stack.Screen name="Opinions" component={Opinions} options={optionScreen} />
         <Stack.Screen name="HomePage" component={HomePage} options={optionScreen} />
+        <Stack.Screen name="MapScreen" component={MapScreen} options={optionScreen} />
     </Stack.Navigator>
   );
 }
