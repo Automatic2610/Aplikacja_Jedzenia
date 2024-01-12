@@ -57,22 +57,23 @@ export default function Opinions({ navigation }) {
   };
 
   useEffect(() => {
-    for (const restauracja of restauracje) {
-      axios.get(`http://10.0.2.2:5725/opinie/${restauracja.value}`)
-        .then((response) => {
-          if(response.data.opinie.length > 0)
-          {
-            setOpinieRestauracji({
-              ...opinieRestauracji,
-              [restauracja.value]: response.data.opinie,
-            });
+    const requests = restauracje.map((restauracja) => axios.get(`http://10.0.2.2:5725/opinie/${restauracja.value}`));
+
+    Promise.all(requests)
+      .then((responses) => {
+        const updatedOpinieRestauracji = {};
+        responses.forEach((response, index) => {
+          if (response.data.opinie.length > 0) {
+            const restauracja = restauracje[index].value;
+            updatedOpinieRestauracji[restauracja] = response.data.opinie;
           }
-        })
-        .catch((error) => {
-          console.error(error);
         });
-    }
-  }, [value]);
+        setOpinieRestauracji(updatedOpinieRestauracji);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -119,8 +120,7 @@ export default function Opinions({ navigation }) {
             style={styles.input}
             placeholder={'Wpisz opinię'}
             value={task}
-            onChangeText={(text) => setTask(text)}
-          />
+            onChangeText={(text) => setTask(text)}/>
           <TouchableOpacity onPress={() => ustawNoweZadanie()}>
             <View style={styles.dodajZadanie}>
               <Text>+</Text>
@@ -155,7 +155,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     padding: 20,
     gap: 15,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    borderColor: '#C0C0C0',
+    borderWidth: 2,
   },
   input: {
     paddingHorizontal: 25,
