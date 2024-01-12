@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, ScrollView, Keyboard } from 'react-native';
+import { View, Text, SafeAreaView, ScrollView, Keyboard, Alert} from 'react-native';
 import COLORS from '../Pages/Components/COLORS.js'
 import Input from './Components/Input.js';
 import Button from './Components/Button.js';
 import Loader from './Components/Loader.js';
+import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const Logowanie = ({ navigation }) => {
 
@@ -27,28 +28,29 @@ const Logowanie = ({ navigation }) => {
     }
   };
 
-  const login = () => {
+  const login = async () => {
     setLoading(true);
     setTimeout(async () => {
       setLoading(false);
-      let userData = await AsyncStorage.getItem('userData');
-      if (userData) {
-        userData = JSON.parse(userData);
-        if (
-          inputs.email == userData.email &&
-          inputs.password == userData.password
-        ) {
-          navigation.navigate('Home_Page');
-          AsyncStorage.setItem(
-            'userData',
-            JSON.stringify({...userData, loggedIn: true}),
-          );
-        } else {
-          Alert.alert('Error', 'Błędne dane');
-        }
-      } else {
-        Alert.alert('Error', 'Użytkonik nie istnieje');
+    
+        try {
+      // Wysyłanie danych na serwer przy użyciu Axiosa
+      const response = await axios.put('http://10.0.2.2:5725/login',inputs);
+      // Jeśli serwer zwrócił odpowiedź pomyślną
+      if (response.data.success) {
+        setLoading(false);
+        navigation.navigate('HomePage');
+        await AsyncStorage.setItem('userData',JSON.stringify({...inputs, loggedIn: true}),);
+      } 
+      else {
+        setLoading(false);
+        Alert.alert('Błąd 1', JSON.stringify(response.data.error),[ { text: 'Zrozumiano'}]);
       }
+    } catch (error) 
+    {
+      setLoading(false);
+      Alert.alert('Błąd 2',error.message,[ { text: 'Zrozumiano'}]);
+    }
     }, 3000);
   };
 
@@ -82,10 +84,10 @@ const Logowanie = ({ navigation }) => {
             onChangeText={text => handleOnchange(text, 'password')}
             onFocus={() => handleError(null, 'password')}
             iconName="lock-outline"
-            label="password"
+            label="Hasło"
             placeholder="Wpisz swoje hasło"
-            error={errors.rejestracja}
-            rejestracja
+            error={errors.password}
+            password
           />
           <Button title="Zaloguj się" onPress={validate} />
           <Text
