@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView, ScrollView, Keyboard, Alert} from 'react-native';
+import { View, Text, SafeAreaView, ScrollView, Keyboard, Alert, Pressable} from 'react-native';
 import COLORS from '../Pages/Components/COLORS.js'
 import Input from './Components/Input.js';
-import Button from './Components/Button.js';
 import Loader from './Components/Loader.js';
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -62,13 +61,15 @@ const Logowanie = ({ navigation }) => {
     setErrors(prevState => ({...prevState, [input]: error}));
   };
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
+    <SafeAreaView style={{backgroundColor: COLORS.ivory, flex: 1}}>
       <Loader visible={loading} />
       <View style={{paddingTop: 50, paddingHorizontal: 20}}>
-        <Text style={{color: COLORS.black, fontSize: 40, fontWeight: 'bold'}}>
+        <Text style={{color: COLORS.orange,textAlign:'center' ,fontSize: 52, fontWeight: 'bold', fontStyle:'italic',   textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
+    }}>
           Zaloguj się
         </Text>
-        <Text style={{color: COLORS.grey, fontSize: 18, marginVertical: 10}}>
+        <Text style={{color: COLORS.brown, textAlign:'center',fontSize: 18, marginVertical: 10}}>
           Wpisz dane do zalogowania
         </Text>
         <View style={{marginVertical: 20}}>
@@ -89,11 +90,26 @@ const Logowanie = ({ navigation }) => {
             error={errors.password}
             password
           />
-          <Button title="Zaloguj się" onPress={validate} />
+            <Pressable style={{    color:COLORS.ivory,
+    height:55,
+    width: '100%',
+    backgroundColor: COLORS.orange,
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:15,
+    marginVertical:20,
+    borderColor:COLORS.brown,
+    borderWidth:3,}
+            } title="Zarejestruj się!" onPress={validate} >
+            <Text style={{              color: COLORS.ivory,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              fontSize: 24,}}>Zaloguj się !</Text>
+            </Pressable>
           <Text
             onPress={() => navigation.navigate('Rejestracja')}
             style={{
-              color: COLORS.black,
+              color: COLORS.brown,
               fontWeight: 'bold',
               textAlign: 'center',
               fontSize: 16

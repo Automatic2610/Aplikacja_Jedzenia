@@ -22,14 +22,14 @@ const Input = ({
               borderColor: error
                 ? COLORS.red
                 : isFocused
-                ? COLORS.darkBlue
-                : COLORS.light,
+                ? COLORS.indygo
+                : COLORS.ivory,
               alignItems: 'center',
             },
           ]}>
           <Icon
             name={iconName}
-            style={{color: COLORS.darkBlue, fontSize: 22, marginRight: 10}}
+            style={{color: COLORS.indygo, fontSize: 22, marginRight: 10}}
           />
           <TextInput
             autoCorrect={false}
@@ -39,14 +39,14 @@ const Input = ({
             }}
             onBlur={() => setIsFocused(false)}
             secureTextEntry={hidePassword}
-            style={{color: COLORS.darkBlue, flex: 1}}
+            style={{color: COLORS.indygo, flex: 1}}
             {...props}
           />
           {password && (
             <Icon
               onPress={() => setHidePassword(!hidePassword)}
               name={hidePassword ? 'eye-outline' : 'eye-off-outline'}
-              style={{color: COLORS.darkBlue, fontSize: 22}}
+              style={{color: COLORS.indygo, fontSize: 22}}
             />
           )}
         </View>
@@ -63,14 +63,18 @@ const Input = ({
     label: {
       marginVertical: 5,
       fontSize: 14,
-      color: COLORS.grey,
+      fontWeight:'bold',
+      color: COLORS.brown,
     },
     inputContainer: {
       height: 55,
-      backgroundColor: COLORS.light,
+      backgroundColor: COLORS.orange,
       flexDirection: 'row',
       paddingHorizontal: 15,
       borderWidth: 0.5,
+      borderStyle:'dotted',
+      borderBlockColor:COLORS.orange,
+      borderWidth:4,
     },
   });
   

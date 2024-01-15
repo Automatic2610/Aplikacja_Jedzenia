@@ -9,12 +9,13 @@ const Button = ({
         <TouchableOpacity onPress={onPress} style={{
             height:55,
             width: '100%',
-            backgroundColor: COLORS.blue,
+            backgroundColor: COLORS.orange,
             justifyContent:'center',
             alignItems:'center',
+            borderRadius:15,
             marginVertical:20
         }}>
-            <Text style={{color:COLORS.white, fontWeight:'bold', fontSize: 18, textAlign:'center'}} >{title}</Text>
+            <Text style={{color:COLORS.dark, fontWeight:'bold', fontSize: 18, textAlign:'center'}} >{title}</Text>
         </TouchableOpacity>
     );
 };

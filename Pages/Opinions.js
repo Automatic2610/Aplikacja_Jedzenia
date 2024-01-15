@@ -10,6 +10,7 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
+import COLORS from './Components/COLORS';
 import Task from '../Pages/Components/Task';
 import DropDownPicker from 'react-native-dropdown-picker';
 import axios from 'axios';
@@ -137,13 +138,15 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#ABCDEF',
+    backgroundColor: COLORS.ivory,
   },
   naglowek: {
     marginTop: 70,
     paddingHorizontal: 30,
     fontWeight: 'bold',
-    fontSize: 24,
+    fontSize: 28,
+    color:COLORS.brown,
+    alignItems:'center',
   },
   opinie: {
     marginTop: 20,
@@ -155,33 +158,35 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     padding: 20,
     gap: 15,
-    borderColor: '#C0C0C0',
-    borderWidth: 2,
   },
   input: {
     paddingHorizontal: 25,
     flex: 1,
-    backgroundColor: '#ffffff',
-    borderColor: '#C0C0C0',
+    backgroundColor: COLORS.orange,
     borderRadius: 60,
-    borderWidth: 1,
+    borderWidth:3,
+    borderColor:COLORS.brown,
   },
   dodajZadanie: {
     width: 60,
     height: 60,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.orange,
     borderRadius: 60,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: '#C0C0C0',
-    borderWidth: 1,
+    borderWidth:3,
+    borderColor:COLORS.brown,
   },
   wybierz: {
     paddingHorizontal: 25,
+    backgroundColor: COLORS.orange,
+    borderWidth:3,
+    borderColor:COLORS.brown,
   },
   naglowekRestauracji: {
     fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 10,
+    color: COLORS.brown,
   },
 });

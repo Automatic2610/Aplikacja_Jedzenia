@@ -7,7 +7,9 @@ import {
   Keyboard,
   ScrollView,
   Alert,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  StyleSheet,
+  Pressable,
 } from 'react-native';
 import COLORS from '../Pages/Components/COLORS.js'
 import Input from './Components/Input.js';
@@ -87,14 +89,15 @@ const Rejestracja = ({navigation}) => {
     setErrors(prevState => ({...prevState, [input]: error}));
   };
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.white, flex: 1}}>
+    <SafeAreaView style={{backgroundColor: COLORS.ivory, flex: 1}}>
       <Loader visible={loading} />
       <ScrollView
         contentContainerStyle={{paddingTop: 50, paddingHorizontal: 20}}>
-        <Text style={{color: COLORS.black, fontSize: 40, fontWeight: 'bold'}}>
+        <Text style={{color: COLORS.orange,textAlign:'center' ,fontSize: 52, fontWeight: 'bold', fontStyle:'italic',   textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,}}>
           Rejestracja
         </Text>
-        <Text style={{color: COLORS.grey, fontSize: 18, marginVertical: 10}}>
+        <Text style={{color: COLORS.powderblue, textAlign:'center',fontSize: 18, marginVertical: 10}}>
           Wprowadź dane do rejestracji
         </Text>
         <View style={{marginVertical: 20}}>
@@ -134,11 +137,16 @@ const Rejestracja = ({navigation}) => {
             error={errors.password}
             password
           />
-          <Button title="Zarejestruj się!" onPress={validate} />
+          <Pressable style={styles.przycisk} title="Zarejestruj się!" onPress={validate} >
+            <Text style={{              color: COLORS.ivory,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              fontSize: 24,}}>Zarejestruj się !</Text>
+            </Pressable>
           <Text
             onPress={() => navigation.navigate('Logowanie')}
             style={{
-              color: COLORS.black,
+              color: COLORS.indygo,
               fontWeight: 'bold',
               textAlign: 'center',
               fontSize: 16,
@@ -151,4 +159,18 @@ const Rejestracja = ({navigation}) => {
   );
 };
 
+const styles = StyleSheet.create({
+  przycisk:{
+    color:COLORS.ivory,
+    height:55,
+    width: '100%',
+    backgroundColor: COLORS.orange,
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:15,
+    marginVertical:20,
+    borderColor:COLORS.brown,
+    borderWidth:3,
+  },
+});
 export default Rejestracja;
