@@ -10,7 +10,7 @@ const Task = (props) => {
 
   const ChangeColor = () => {
     if (kolor === 'white') {
-      setKolor('blue');
+      setKolor('green');
       setKolor1('white');
     } else {
       setKolor('white');

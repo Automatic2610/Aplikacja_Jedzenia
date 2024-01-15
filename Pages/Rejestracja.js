@@ -146,7 +146,7 @@ const Rejestracja = ({navigation}) => {
           <Text
             onPress={() => navigation.navigate('Logowanie')}
             style={{
-              color: COLORS.indygo,
+              color: COLORS.brown,
               fontWeight: 'bold',
               textAlign: 'center',
               fontSize: 16,

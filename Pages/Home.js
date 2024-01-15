@@ -13,11 +13,11 @@ export default function Home({ navigation }) {
       </Text>
       </View>
       <View style={styles.przejscie}>
-      <Pressable style={styles.przycisk} title="Zarejestruj się!" onPress={() => navigation.navigate('Rejestracja')} >
+      <Pressable style={styles.przycisk} title="Zapraszamy" onPress={() => navigation.navigate('Rejestracja')} >
             <Text style={{              color: COLORS.ivory,
               fontWeight: 'bold',
               textAlign: 'center',
-              fontSize: 24,}}>Zarejestruj się !</Text>
+              fontSize: 24,}}>Zapraszamy !</Text>
             </Pressable>
       </View>
     </View>
