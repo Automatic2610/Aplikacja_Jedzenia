@@ -1,15 +1,11 @@
-// MenuOgolne.js
+
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-const handleGoToBasket = () => {
-    navigation.navigate('Koszyk', { selectedDishes, restaurant });
-  };
-
-const MenuOgolne = ({ route }) => {
+const MenuOgolne = ({ route, navigation }) => {
   const { restaurant } = route.params;
 
-  // Mapa z przypisanymi daniami, kolorami tła i ścieżkami do obrazów dla każdej restauracji
+
   const restaurantData = {
     'Duży chicken': {
       menu: [
@@ -23,7 +19,7 @@ const MenuOgolne = ({ route }) => {
     'Spaghetti kręcone': {
       menu: [
         { id: 1, name: 'Spaghetti zielone', price: '25 zł', preparationTime: '30 min' },
-        { id: 3, name: 'Makaron po Włosku', price: '18 zł', preparationTime: '25 min' },
+        { id: 2, name: 'Makaron po Włosku', price: '18 zł', preparationTime: '25 min' },
         { id: 3, name: 'Makaron mieszany', price: '35 zł', preparationTime: '15 min' },
       ],
       backgroundColor: '#124E78',
@@ -62,7 +58,7 @@ const MenuOgolne = ({ route }) => {
     menu: [],
     backgroundColor: '#FFFFFF',
     image: null,
-  }; // Domyślne puste menu, białe tło i brak obrazu
+  }; 
 
   const [selectedDishes, setSelectedDishes] = useState([]);
 
@@ -75,7 +71,16 @@ const MenuOgolne = ({ route }) => {
     }
   };
 
-   return (
+  const handleGoToBasket = () => {
+    const selectedDishesDetails = selectedDishes.map((dishId) => {
+      const selectedDish = menu.find((dish) => dish.id === dishId);
+      return selectedDish;
+    });
+
+    navigation.navigate('Koszyk', { selectedDishes: selectedDishesDetails, restaurant });
+  };
+
+  return (
     <View style={[styles.container, { backgroundColor }]}>
       <Text style={styles.restaurantName}>{`Menu: ${restaurant.name}`}</Text>
       {image && <Image source={image} style={styles.restaurantImage} />}
@@ -96,10 +101,10 @@ const MenuOgolne = ({ route }) => {
         ))}
       </View>
       <View style={styles.bottomTextContainer}>
-  <TouchableOpacity style={styles.bottomText} onPress={handleGoToBasket}>
-    <Text>Przejdź do koszyka</Text>
-  </TouchableOpacity>
-</View>
+        <TouchableOpacity style={styles.bottomText} onPress={handleGoToBasket}>
+          <Text>Przejdź do koszyka</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -118,7 +123,7 @@ const styles = StyleSheet.create({
   },
   restaurantImage: {
     width: '60%',
-    height: 200, // Dostosuj wysokość obrazu pod napisem
+    height: 200,
     resizeMode: 'cover',
     marginBottom: 10,
   },
