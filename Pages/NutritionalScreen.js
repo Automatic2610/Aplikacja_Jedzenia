@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     borderRadius: 10,
     padding: 10,
-    backgroundColor: '#FFC87C',
+    backgroundColor: '#ff914c',
   },
   dishImage: {
     width: 150,
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   backButton: {
-    backgroundColor: '#FF914C',
+    backgroundColor: '#ff914c',
     padding: 10,
     borderRadius: 5,
     marginTop: 20,
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   backButtonText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
 });
 

@@ -34,11 +34,11 @@ const Logowanie = ({ navigation }) => {
     
         try {
       // Wysyłanie danych na serwer przy użyciu Axiosa
-      const response = await axios.put('http://10.0.2.2:5725/login',inputs);
+      const response = await axios.put('http://192.168.1.33:5725/login',inputs);
       // Jeśli serwer zwrócił odpowiedź pomyślną
       if (response.data.success) {
         setLoading(false);
-        navigation.navigate('HomePage');
+        navigation.navigate('HomeScreen');
         await AsyncStorage.setItem('userData',JSON.stringify({...inputs, loggedIn: true}),);
       } 
       else {

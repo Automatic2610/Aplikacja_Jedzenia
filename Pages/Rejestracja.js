@@ -21,6 +21,7 @@ const Rejestracja = ({navigation}) => {
     email: '',
     fullname: '',
     phone: '',
+    adres: '',
     password: '',
   });
   const [errors, setErrors] = React.useState({});
@@ -42,7 +43,10 @@ const Rejestracja = ({navigation}) => {
       handleError('Prosze wprowadź swoje Imię', 'fullname');
       isValid = false;
     }
-
+    if (!inputs.adres) {
+      handleError('Prosze wprowadź swoj adres', 'adres');
+      isValid = false;
+    }
     if (!inputs.phone) {
       handleError('Prosze wprowadź numer telefonu', 'phone');
       isValid = false;
@@ -65,7 +69,7 @@ const Rejestracja = ({navigation}) => {
     setLoading(true);
     try {
       // Wysyłanie danych na serwer przy użyciu Axiosa
-      const response = await axios.post('http://10.0.2.2:5725/register',inputs);
+      const response = await axios.post('http://192.168.1.33:5725/register',inputs);
       // Jeśli serwer zwrócił odpowiedź pomyślną
       if (response.data.success) {
         setLoading(false);
@@ -118,7 +122,14 @@ const Rejestracja = ({navigation}) => {
             placeholder="Wprowadź swoje Imie i Nazwisko"
             error={errors.fullname}
           />
-
+          <Input
+            onChangeText={text => handleOnchange(text, 'adres')}
+            onFocus={() => handleError(null, 'adres')}
+            iconName="map-outline"
+            label="Adres"
+            placeholder="Wprowadź swoj adres"
+            error={errors.adres}
+          />
           <Input
             keyboardType="numeric"
             onChangeText={text => handleOnchange(text, 'phone')}

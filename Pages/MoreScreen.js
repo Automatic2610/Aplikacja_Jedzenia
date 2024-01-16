@@ -1,9 +1,17 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const MoreScreen = () => {
   const navigation = useNavigation();
+
+
+  const handleLogout = async() => {
+    await AsyncStorage.removeItem('userData');
+    navigation.navigate('Logowanie');
+  };
 
   return (
     <View style={styles.container}>
@@ -41,7 +49,7 @@ const MoreScreen = () => {
             <Text style={styles.linkText}>Opinie</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Wyloguj')}>
+        <TouchableOpacity onPress={handleLogout}>
           <View style={styles.linkItem}>
             <Image
               source={require('../images/logout-icon.png')}
@@ -80,7 +88,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20, 
     paddingHorizontal: 20, 
     borderRadius: 10, 
-    backgroundColor: '#FFC87C', 
+    backgroundColor: '#ff914c', 
   },
   linkIcon: {
     width: 40, 
