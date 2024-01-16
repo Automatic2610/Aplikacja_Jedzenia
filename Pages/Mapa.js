@@ -1,4 +1,3 @@
-// Mapa.js
 import React from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
@@ -17,8 +16,7 @@ const Mapa = ({ navigation }) => {
   };
 
   const handleRestaurantPress = (restaurant) => {
-    // Przejście do ekranu MenuOgolne i przekazanie informacji o restauracji
-    navigation.navigate('MenuOgolne', { restaurant });
+    navigation.navigate('OrderScreen', { restaurant });
   };
 
   return (

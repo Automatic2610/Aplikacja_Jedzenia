@@ -7,7 +7,7 @@ const CouponsScreen = () => {
     { id: 1, image: require('../images/spagetti.png'), code: 'ABC123', offer: 'Kod zniżkowy 10%' },
     { id: 2, image: require('../images/chicken.png'), code: 'DEF456', offer: 'Kod zniżkowy 10%' },
     { id: 3, image: require('../images/salad.png'), code: 'GHI789', offer: 'Kod zniżkowy 10%' },
-    { id: 4, image: require('../images/fries.png'), code: 'JKL012', offer: 'Frytki 1 plus 1 gratis' },
+    { id: 4, image: require('../images/fries.png'), code: 'JKL012', offer: 'Kod zniżkowy 10%' },
     { id: 5, image: require('../images/steak.png'), code: 'MNO345', offer: 'Kod zniżkowy 10%' },
     { id: 6, image: require('../images/pizza_slice.png'), code: 'PQR678', offer: 'Kod zniżkowy 15%' },
   ];
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    backgroundColor: '#B4C5E4',
+    backgroundColor: '#FBFFF1',
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',

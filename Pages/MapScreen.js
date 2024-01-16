@@ -1,29 +1,27 @@
-// MapScreen.js
-import React from 'react';
-import { View, StyleSheet, Button } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import React, { useState } from 'react';
+import { View, StyleSheet, Button, Text } from 'react-native';
+import MapView, { Marker, Callout } from 'react-native-maps';
+import { useNavigation } from '@react-navigation/native';
 
-// Komponent Mapa przyjmuje parametr navigation z nawigacji (jeśli korzystasz z React Navigation)
-const MapScreen = ({ navigation }) => {
-  // Dane restauracji z losowymi współrzędnymi
+const MapScreen = () => {
+  const navigation = useNavigation();
+
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+
   const restaurants = [
-    { name: 'Zupa z wczoraj', latitude: 50.868, longitude: 20.631 },
-    { name: 'Kebab aż pali', latitude: 50.867, longitude: 20.628 },
-    { name: 'Pizza u Siwego', latitude: 50.871, longitude: 20.633 },
-    { name: 'Pierogi u Kryśki', latitude: 50.874, longitude: 20.629 },
-    { name: 'Dobra buła', latitude: 50.869, longitude: 20.626 },
+    { name: 'Restauracja "Testy"', latitude: 50.868, longitude: 20.631, description: 'Złóż zamówienie' },
+    { name: 'Restauracja "Testy"', latitude: 50.867, longitude: 20.628, description: 'Złóż zamówienie' },
+    { name: 'Restauracja "Testy"', latitude: 50.871, longitude: 20.633, description: 'Złóż zamówieniee' },
+    { name: 'Restauracja "Testy"', latitude: 50.874, longitude: 20.629, description: 'Złóż zamówienie' },
+    { name: 'Restauracja "Testy"', latitude: 50.869, longitude: 20.626, description: 'Złóż zamówienie' },
   ];
 
-  // Obsługa przycisku powrotu
-  const handleGoBack = () => {
-    // Powrót do poprzedniego ekranu za pomocą nawigacji
-    navigation.goBack();
+  const handleGoToMenu = (restaurant) => {
+    navigation.navigate('OrderScreen', { restaurant });
   };
 
   return (
-    // Komponent View, który zawiera MapView i przycisk powrotu
     <View style={styles.container}>
-      {/* Komponent MapView do wyświetlania mapy */}
       <MapView
         style={styles.map}
         initialRegion={{
@@ -33,7 +31,6 @@ const MapScreen = ({ navigation }) => {
           longitudeDelta: 0.0421,
         }}
       >
-        {/* Dodaj markery dla każdej restauracji */}
         {restaurants.map((restaurant, index) => (
           <Marker
             key={index}
@@ -41,18 +38,20 @@ const MapScreen = ({ navigation }) => {
               latitude: restaurant.latitude,
               longitude: restaurant.longitude,
             }}
-            title={restaurant.name}
-            description={`Sprawdź więcej informacji o ${restaurant.name}`}
-          />
+          >
+            <Callout onPress={() => handleGoToMenu(restaurant)}>
+              <View>
+                <Text>{restaurant.name}</Text>
+                <Text>{restaurant.description}</Text>
+              </View>
+            </Callout>
+          </Marker>
         ))}
       </MapView>
-      {/* Przycisk powrotu, który wywołuje funkcję handleGoBack po naciśnięciu */}
-      <Button title="Powrót" onPress={handleGoBack} />
     </View>
   );
 };
 
-// Style dla komponentu Mapa
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -62,5 +61,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// Eksport komponentu Mapa
 export default MapScreen;

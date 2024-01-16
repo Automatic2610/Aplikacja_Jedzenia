@@ -9,7 +9,10 @@ import Opinions from "../Pages/Opinions.js";
 import MoreScreen from "../Pages/MoreScreen.js"; 
 import NutritionalScreen from "../Pages/NutritionalScreen.js";
 import Rejestracja from "../Pages/Rejestracja.js";
-import MapScreen from './MapScreen.js';
+import MapScreen from '../Pages/MapScreen.js';
+import OrderScreen from '../Pages/OrderScreen.js';
+import Koszyk from '../Pages/Koszyk.js';
+import OrderConfirmation from '../Pages/OrderConfirmation.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +58,9 @@ const MainStack = () => {
         <Stack.Screen name="NutritionalScreen" component={NutritionalScreen} options={optionScreen} />
         <Stack.Screen name="Rejestracja" component={Rejestracja} options={optionScreen} />
         <Stack.Screen name="MapScreen" component={MapScreen} options={optionScreen} />
+        <Stack.Screen name="OrderScreen" component={OrderScreen} options={optionScreen} />
+        <Stack.Screen name="Koszyk" component={Koszyk} options={optionScreen} />
+        <Stack.Screen name="OrderConfirmation" component={OrderConfirmation} options={optionScreen} />
     </Stack.Navigator>
   );
 }
