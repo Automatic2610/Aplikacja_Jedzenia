@@ -1,76 +1,81 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, Pressable } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { StyleSheet, Text, Pressable, View, Image } from 'react-native';
 import COLORS from './Components/COLORS';
+
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
-      <View style={styles.zdjecie}>
-        <Image source={require("../images/Powitanie.png")} />
+      <View style={styles.logoContainer}>
+        <Image source={require('../images/logo.png')} style={styles.logo} />
       </View>
-      <View>
-      <Text style={styles.tekst}>Bądź fit, bądź zdrowy!
-      <Icon name='heart' style={{color:'red', fontSize:24}}></Icon>
-      </Text>
+      <View style={styles.mottoContainer}>
+        <View style={styles.mottoBackground}>
+          <Text style={styles.mottoText}>
+            Zamawiaj pyszne jedzenie i ciesz się smakiem z dostawą pod drzwi!
+          </Text>
+        </View>
       </View>
-      <View style={styles.przejscie}>
-      <Pressable style={styles.przycisk} title="Zapraszamy" onPress={() => navigation.navigate('Rejestracja')} >
-            <Text style={{              color: COLORS.ivory,
-              fontWeight: 'bold',
-              textAlign: 'center',
-              fontSize: 24,}}>Zapraszamy !</Text>
-            </Pressable>
+      <View style={styles.przyciskContainer}>
+        <Pressable 
+          style={styles.przycisk} 
+          onPress={() => navigation.navigate('Logowanie')}
+        >
+          <Text style={styles.przyciskText}>Zapraszamy</Text>
+        </Pressable>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  tekst:{
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#FBFFF1',
+  },
+  logoContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 300,
+    height: 200,
+  },
+  mottoContainer: {
+    flex: 1, 
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mottoBackground: {
+    backgroundColor: '#124E78',
+    padding: 20,
+    borderRadius: 15,
+    alignItems: 'center',
+  },
+  mottoText: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 20,
-    color: COLORS.brown,
+    color: '#FBFFF1',
+    lineHeight: 30,
   },
-  przycisk:{
-    color:COLORS.ivory,
-    height:55,
-    width: '80%',
-    backgroundColor: COLORS.orange,
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:15,
-    marginVertical:20,
-    borderColor:COLORS.brown,
-    borderWidth:3,
-  },
-  container: {
+  przyciskContainer: {
     flex: 1,
-    backgroundColor: COLORS.ivory,
-  },
-  zdjecie: {
-    width: 300,
-    height: 300,
-    paddingTop: 30,
-    right: 30,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  przejscie: {
-    top: 400,
-    left:40,
-  },
-  text: {
-    fontSize: 24,
-    fontStyle: 'italic',
-  },
-  Zapraszamy: {
-    width:200,
-    backgroundColor: '#FF914C',
-    borderRadius: 60,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: '#803200',
-    borderWidth: 5,
+  },
+  przycisk: {
+    backgroundColor: COLORS.orange,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderColor: COLORS.brown,
+    borderWidth: 3,
+  },
+  przyciskText: {
+    color: COLORS.ivory,
+    fontSize: 24,
   },
 });
