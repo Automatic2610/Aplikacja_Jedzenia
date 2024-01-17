@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Keyboard,
-  Platform,
-  ScrollView,
-} from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Keyboard, Platform, ScrollView,} from 'react-native';
 import COLORS from './Components/COLORS';
 import Task from '../Pages/Components/Task';
 import DropDownPicker from 'react-native-dropdown-picker';
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native'; // Import useNavigation
+import { useNavigation } from '@react-navigation/native';
 
 export default function Opinions() {
-  const navigation = useNavigation(); // Initialize navigation
+  const navigation = useNavigation();
 
   const [task, setTask] = useState('');
   const [open, setOpen] = useState(false);
@@ -52,11 +42,10 @@ export default function Opinions() {
         setTask('');
       } else {
         console.error('Błąd podczas wysyłania danych:', response.data.error);
-        // Obsługa błędu
+
       }
     } catch (error) {
       console.error('Błąd podczas wysyłania danych:', error);
-      // Obsługa błędu
     }
   };
 
@@ -79,12 +68,12 @@ export default function Opinions() {
       });
   }, []);
 
-  return (
+   return (
     <View style={styles.container}>
       <Text style={styles.naglowek}>Opinie naszych restauracji</Text>
       <ScrollView
         style={styles.opinie}
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={styles.scrollViewContent}
         keyboardShouldPersistTaps="handled">
         {Object.entries(opinieRestauracji).map(([restauracja, opinie]) => (
           <View key={restauracja}>
@@ -120,7 +109,7 @@ export default function Opinions() {
             '#e9c46a',
           ]}
         />
-        <View style={{ flexDirection: 'row', gap: 20 }}>
+        <View style={styles.inputRow}>
           <TextInput
             style={styles.input}
             placeholder={'Wpisz opinię'}
@@ -208,5 +197,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
+  },
+  inputRow: {
+    flexDirection: 'row',
+    gap: 20,
   },
 });

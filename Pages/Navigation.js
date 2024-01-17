@@ -13,6 +13,7 @@ import MapScreen from '../Pages/MapScreen.js';
 import OrderScreen from '../Pages/OrderScreen.js';
 import Koszyk from '../Pages/Koszyk.js';
 import OrderConfirmation from '../Pages/OrderConfirmation.js';
+import Home from '../Pages/Home.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,8 +50,8 @@ const MainStack = () => {
 
   return (
     <Stack.Navigator initialRouteName={initialRouteName}>
+        <Stack.Screen name="Home" component={Home} options={optionScreen} />
         <Stack.Screen name="Logowanie" component={Logowanie} options={optionScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} options={optionScreen} />
         <Stack.Screen name="MenuScreen" component={MenuScreen} options={optionScreen} />
         <Stack.Screen name="Opinions" component={Opinions} options={optionScreen} />
         <Stack.Screen name="MoreScreen" component={MoreScreen} options={optionScreen} />

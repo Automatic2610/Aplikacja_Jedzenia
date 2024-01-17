@@ -1,22 +1,11 @@
 import React from 'react';
-import axios, { Axios } from 'axios';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Keyboard,
-  ScrollView,
-  Alert,
-  KeyboardAvoidingView,
-  StyleSheet,
-  Pressable,
-} from 'react-native';
-import COLORS from '../Pages/Components/COLORS.js'
+import { View, Text, SafeAreaView, Keyboard, ScrollView, Alert, StyleSheet, Pressable } from 'react-native';
+import axios from 'axios'; // Import Axios library
+import COLORS from '../Pages/Components/COLORS.js';
 import Input from './Components/Input.js';
-import Button from './Components/Button.js';
 import Loader from './Components/Loader.js';
 
-const Rejestracja = ({navigation}) => {
+const Rejestracja = ({ navigation }) => {
   const [inputs, setInputs] = React.useState({
     email: '',
     fullname: '',
@@ -59,7 +48,6 @@ const Rejestracja = ({navigation}) => {
       handleError('Hasło musi mieć min. 5 znaków', 'password');
       isValid = false;
     }
-
     if (isValid) {
       rejestracja();
     }
@@ -68,54 +56,44 @@ const Rejestracja = ({navigation}) => {
   const rejestracja = async () => {
     setLoading(true);
     try {
-      // Wysyłanie danych na serwer przy użyciu Axiosa
-      const response = await axios.post('http://192.168.1.33:5725/register',inputs);
-      // Jeśli serwer zwrócił odpowiedź pomyślną
+      const response = await axios.post('http://192.168.1.33:5725/register', inputs);
       if (response.data.success) {
         setLoading(false);
         navigation.navigate('Logowanie');
-      } 
-      else {
+      } else {
         setLoading(false);
-        Alert.alert('Błąd 1', JSON.stringify(response.data.error),[ { text: 'Zrozumiano'}]
-        );
+        Alert.alert('Błąd', response.data.error, [{ text: 'Zrozumiano' }]);
       }
     } catch (error) {
       setLoading(false);
-      Alert.alert(error);
+      Alert.alert('Błąd', error.message, [{ text: 'Zrozumiano' }]);
     }
   };
 
   const handleOnchange = (text, input) => {
-    setInputs(prevState => ({...prevState, [input]: text}));
+    setInputs((prevState) => ({ ...prevState, [input]: text }));
   };
   const handleError = (error, input) => {
-    setErrors(prevState => ({...prevState, [input]: error}));
+    setErrors((prevState) => ({ ...prevState, [input]: error }));
   };
+
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.ivory, flex: 1}}>
+    <SafeAreaView style={styles.safeArea}>
       <Loader visible={loading} />
-      <ScrollView
-        contentContainerStyle={{paddingTop: 50, paddingHorizontal: 20}}>
-        <Text style={{color: COLORS.orange,textAlign:'center' ,fontSize: 52, fontWeight: 'bold', fontStyle:'italic',   textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 5,}}>
-          Rejestracja
-        </Text>
-        <Text style={{color: COLORS.powderblue, textAlign:'center',fontSize: 18, marginVertical: 10}}>
-          Wprowadź dane do rejestracji
-        </Text>
-        <View style={{marginVertical: 20}}>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        <Text style={styles.headerText}>Rejestracja</Text>
+        <Text style={styles.subHeaderText}>Wprowadź dane do rejestracji</Text>
+        <View style={styles.formContainer}>
           <Input
-            onChangeText={text => handleOnchange(text, 'email')}
+            onChangeText={(text) => handleOnchange(text, 'email')}
             onFocus={() => handleError(null, 'email')}
             iconName="email-outline"
             label="Email"
             placeholder="Wprowadź swój adres E-mail"
             error={errors.email}
           />
-
           <Input
-            onChangeText={text => handleOnchange(text, 'fullname')}
+            onChangeText={(text) => handleOnchange(text, 'fullname')}
             onFocus={() => handleError(null, 'fullname')}
             iconName="account-outline"
             label="Imię i nazwisko"
@@ -123,7 +101,7 @@ const Rejestracja = ({navigation}) => {
             error={errors.fullname}
           />
           <Input
-            onChangeText={text => handleOnchange(text, 'adres')}
+            onChangeText={(text) => handleOnchange(text, 'adres')}
             onFocus={() => handleError(null, 'adres')}
             iconName="map-outline"
             label="Adres"
@@ -132,7 +110,7 @@ const Rejestracja = ({navigation}) => {
           />
           <Input
             keyboardType="numeric"
-            onChangeText={text => handleOnchange(text, 'phone')}
+            onChangeText={(text) => handleOnchange(text, 'phone')}
             onFocus={() => handleError(null, 'phone')}
             iconName="phone-outline"
             label="Numer telefonu"
@@ -140,7 +118,7 @@ const Rejestracja = ({navigation}) => {
             error={errors.phone}
           />
           <Input
-            onChangeText={text => handleOnchange(text, 'password')}
+            onChangeText={(text) => handleOnchange(text, 'password')}
             onFocus={() => handleError(null, 'password')}
             iconName="lock-outline"
             label="Hasło"
@@ -148,20 +126,10 @@ const Rejestracja = ({navigation}) => {
             error={errors.password}
             password
           />
-          <Pressable style={styles.przycisk} title="Zarejestruj się!" onPress={validate} >
-            <Text style={{              color: COLORS.ivory,
-              fontWeight: 'bold',
-              textAlign: 'center',
-              fontSize: 24,}}>Zarejestruj się !</Text>
-            </Pressable>
-          <Text
-            onPress={() => navigation.navigate('Logowanie')}
-            style={{
-              color: COLORS.brown,
-              fontWeight: 'bold',
-              textAlign: 'center',
-              fontSize: 16,
-            }}>
+          <Pressable style={styles.button} onPress={validate}>
+            <Text style={styles.buttonText}>Zarejestruj się !</Text>
+          </Pressable>
+          <Text onPress={() => navigation.navigate('Logowanie')} style={styles.loginText}>
             Masz już konto? Zaloguj się!
           </Text>
         </View>
@@ -171,17 +139,56 @@ const Rejestracja = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  przycisk:{
-    color:COLORS.ivory,
-    height:55,
+  safeArea: {
+    backgroundColor: COLORS.ivory,
+    flex: 1,
+  },
+  scrollViewContainer: {
+    paddingTop: 50,
+    paddingHorizontal: 20,
+  },
+  headerText: {
+    color: COLORS.orange,
+    textAlign: 'center',
+    fontSize: 52,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
+  },
+  subHeaderText: {
+    color: COLORS.powderblue,
+    textAlign: 'center',
+    fontSize: 18,
+    marginVertical: 10,
+  },
+  formContainer: {
+    marginVertical: 20,
+  },
+  button: {
+    color: COLORS.ivory,
+    height: 55,
     width: '100%',
     backgroundColor: COLORS.orange,
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:15,
-    marginVertical:20,
-    borderColor:COLORS.brown,
-    borderWidth:3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    marginVertical: 20,
+    borderColor: COLORS.brown,
+    borderWidth: 3,
+  },
+  buttonText: {
+    color: COLORS.ivory,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 24,
+  },
+  loginText: {
+    color: COLORS.brown,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 16,
   },
 });
+
 export default Rejestracja;

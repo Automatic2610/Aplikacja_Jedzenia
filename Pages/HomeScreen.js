@@ -4,6 +4,7 @@ import { Image, StyleSheet, View, Text } from 'react-native';
 import MapScreen from './MapScreen';
 import CouponsScreen from './CouponsScreen';
 import MoreScreen from './MoreScreen';
+import COLORS from './Components/COLORS';
 
 const Tab = createBottomTabNavigator();
 
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FBFFF1',
+    backgroundColor: COLORS.ivory,
   },
   logo: {
     width: 300,
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#FBFFF1',
+    color: COLORS.ivory,
     lineHeight: 30,
   },
   deliveryContainer: {

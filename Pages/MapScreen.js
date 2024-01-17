@@ -1,19 +1,13 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Button, Text } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Text } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
-import { useNavigation } from '@react-navigation/native';
 
-const MapScreen = () => {
-  const navigation = useNavigation();
-
-  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-
+const MapScreen = ({ navigation }) => {
   const restaurants = [
-    { name: 'Restauracja "Testy"', latitude: 50.868, longitude: 20.631, description: 'Złóż zamówienie' },
-    { name: 'Restauracja "Testy"', latitude: 50.867, longitude: 20.628, description: 'Złóż zamówienie' },
-    { name: 'Restauracja "Testy"', latitude: 50.871, longitude: 20.633, description: 'Złóż zamówieniee' },
-    { name: 'Restauracja "Testy"', latitude: 50.874, longitude: 20.629, description: 'Złóż zamówienie' },
-    { name: 'Restauracja "Testy"', latitude: 50.869, longitude: 20.626, description: 'Złóż zamówienie' },
+    { name: 'Tasty - PŚK', latitude: 50.868, longitude: 20.631, description: 'Złóż zamówienie' },
+    { name: 'Tasty - Dworzec PKP', latitude: 50.867, longitude: 20.628, description: 'Złóż zamówienie' },
+    { name: 'Tasty - Suzuki Arena', latitude: 50.871, longitude: 20.633, description: 'Złóż zamówienie' },
+    { name: 'Tasty - Galeria Korona', latitude: 50.874, longitude: 20.629, description: 'Złóż zamówienie' },
   ];
 
   const handleGoToMenu = (restaurant) => {
